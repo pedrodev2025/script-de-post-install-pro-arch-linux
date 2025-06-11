@@ -27,9 +27,9 @@ ping -c 1 8.8.8.8 > /dev/null 2>&1
 check_status "ping -c 1 8.8.8.8"
 
 if [ "$?" -eq 0 ]; then
+USER=$SUDO_USER
   log_message "Conectado à internet. Continuando o script..."
   log_message "A Instalação Está Começando Por Favor Espere"
-
   # Criando Pastas De Produtividade
   log_message "Criando Pastas De Produtividade"
   mkdir -p /home/$USER/TEMP
