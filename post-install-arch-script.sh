@@ -2,7 +2,6 @@
 set -x
 # Variável para o arquivo de log
 LOG_FILE="/var/logs/post-install-arch-logs.log"
-
 # Função para exibir mensagens e registrar no log
 log_message() {
   echo "$1" | tee -a "$LOG_FILE"
@@ -30,7 +29,7 @@ check_status "ping -c 1 8.8.8.8" # Se o ping falhar, o script sairá aqui
 
 # Se chegamos aqui, a conexão está ok
 USER=$SUDO_USER # Obtém o nome do usuário original que invocou o sudo
-
+ln -s /var/log /var/logs
 log_message "Conectado à internet. Continuando o script..."
 log_message "A Instalação Está Começando. Por favor, espere..."
 
