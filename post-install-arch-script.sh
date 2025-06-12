@@ -77,9 +77,9 @@ flatpak update --noninteractive
 check_status "flatpak update --noninteractive"
 
 # Instala aplicativos Flatpak
-log_message "Instalando Chromium (via Flatpak)..."
-flatpak install --noninteractive flathub org.chromium.Chromium
-check_status "flatpak install --noninteractive flathub org.chromium.Chromium"
+log_message "Instalando Chrome (via Flatpak)..."
+flatpak install --noninteractive flathub com.google.Chrome
+check_status "flatpak install --noninteractive flathub com.google.Chrome"
 
 log_message "Instalando VLC (via Flatpak)..."
 flatpak install --noninteractive flathub org.videolan.VLC # Removido -y
