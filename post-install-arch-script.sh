@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 # Variável para o arquivo de log
 LOG_FILE="/var/logs/post-install-arch-logs.log"
 
