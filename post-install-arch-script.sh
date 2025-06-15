@@ -70,9 +70,15 @@ log_message "Instalando VLC"
 pacman -S vlc 
 check_status "pacman -S vlc"
 # Instala Chrome
+log_menssage "Instalando Chrome"
 pacman -S google-chrome
 check_status "pacman -S google-chrome"
 # Instala alpaca
+log_message "Instalando dependencias pro alpaca"
+pacman -S yay
+check_status "pacman -S yay"
+# Instalando python-mammoth
+
 # Instala Gnome Software
 log_message "Instalando Gnome Software e plugin Flatpak..."
 pacman -S --needed --noconfirm gnome-software # Removido sudo
