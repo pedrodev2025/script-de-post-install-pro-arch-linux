@@ -32,7 +32,13 @@ USER=$SUDO_USER # Obtém o nome do usuário original que invocou o sudo
 ln -s /var/log /var/logs
 log_message "Conectado à internet. Continuando o script..."
 log_message "A Instalação Está Começando. Por favor, espere..."
-
+# Configurando repositorio chaotic-aur
+ pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+ pacman-key --lsign-key 3056513887B78AEB
+ pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' --noconfirm
+pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' --noconfirm
+echo "[chaotic-aur]" >> /etc/pacman.conf
+echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf 
 # Criando Pastas De Produtividade
 log_message "Criando Pastas De Produtividade"
 mkdir -p /home/$USER/TEMP
@@ -59,57 +65,17 @@ check_status "pacman -Syu --noconfirm"
 log_message "Instalando utilitários básicos (curl wget unzip)..."
 pacman -S --needed --noconfirm curl wget unzip # Removido sudo
 check_status "pacman -S --needed --noconfirm curl wget unzip"
-
-# Instala Flatpak
-log_message "Instalando Flatpak..."
-pacman -S --needed --noconfirm flatpak # Removido sudo
-check_status "pacman -S --needed --noconfirm flatpak"
-
-# Adiciona o repositório Flathub
-log_message "Adicionando o repositório Flathub..."
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-check_status "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo"
-
-# Atualiza o banco de dados do Flatpak
-log_message "Atualizando o banco de dados do Flatpak..."
-flatpak update --noninteractive
-check_status "flatpak update --noninteractive"
-
-# Instala aplicativos Flatpak
-log_message "Instalando Chrome (via Flatpak)..."
-flatpak install --noninteractive flathub com.google.Chrome
-check_status "flatpak install --noninteractive flathub com.google.Chrome"
-
-log_message "Instalando VLC (via Flatpak)..."
-flatpak install --noninteractive flathub org.videolan.VLC # Removido -y
-check_status "flatpak install --noninteractive flathub org.videolan.VLC"
-
-log_message "Instalando GIMP (via Flatpak)..."
-flatpak install --noninteractive flathub org.gimp.GIMP # Removido -y
-check_status "flatpak install --noninteractive flathub org.gimp.GIMP"
-
-log_message "Instalando Onlyoffice (via Flatpak)..."
-flatpak install --noninteractive flathub org.onlyoffice.desktopeditors
-check_status "flatpak install --noninteractive flathub org.onlyoffice.desktopeditors"
-
-# Instala LM Studio
-log_message "Instalando LM Studio..."
-# Verifica se wget está instalado
-if command -v wget &> /dev/null; then
-  LM_STUDIO_URL="https://installers.lmstudio.ai/linux/x64/0.3.14-5/LM-Studio-0.3.14-5-x64.AppImage"
-  OUTPUT_PATH="/home/$USER/AppImages/lmstudio.AppImage"
-  log_message "Baixando LM Studio de: $LM_STUDIO_URL para $OUTPUT_PATH"
-  wget -O "$OUTPUT_PATH" "$LM_STUDIO_URL"
-  check_status "wget -O \"$OUTPUT_PATH\" \"$LM_STUDIO_URL\""
-  chmod +x "$OUTPUT_PATH"
-  check_status "chmod +x \"$OUTPUT_PATH\""
-else
-  log_message "AVISO: wget não está instalado. Pulando a instalação do LM Studio."
-fi
-
+# Instala VLC
+log_message "Instalando VLC"
+pacman -S vlc 
+check_status "pacman -S vlc"
+# Instala Chrome
+pacman -S google-chrome
+check_status "pacman -S google-chrome"
+# Instala alpaca
 # Instala Gnome Software
 log_message "Instalando Gnome Software e plugin Flatpak..."
-pacman -S --needed --noconfirm gnome-software gnome-software-plugin-flatpak # Removido sudo
+pacman -S --needed --noconfirm gnome-software # Removido sudo
 check_status "pacman -S --needed --noconfirm gnome-software gnome-software-plugin-flatpak"
 
 log_message "Script de pós-instalação concluído com sucesso!"
