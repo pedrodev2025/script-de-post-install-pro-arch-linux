@@ -31,6 +31,7 @@ check_status "ping -c 1 8.8.8.8"
 
 # Se chegamos aqui, a conexão está ok
 USER=$SUDO_USER
+sudo groupadd $USER
 log_message "Conectado à internet. Continuando o script..."
 log_message "A Instalação Está Começando. Por favor, espere..."
 
