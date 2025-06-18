@@ -46,7 +46,7 @@ pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.
 check_status "pacman -U chaotic-mirrorlist"
 
 # Verifica se o Chaotic-AUR já está no pacman.conf antes de adicionar
-if ! grep -q "[chaotic-aur]" /etc/pacman.conf; then
+if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then # CORRIGIDO AQUI
     echo "[chaotic-aur]" >> /etc/pacman.conf
     echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
     log_message "Chaotic-AUR adicionado ao pacman.conf."
@@ -61,7 +61,6 @@ mkdir -p "/home/$USER/TEMP"
 check_status "mkdir -p /home/$USER/TEMP"
 chmod 700 "/home/$USER/TEMP"
 check_status "chmod 700 /home/$USER/TEMP"
-# chown "$USER":"$USER" "/home/$USER/TEMP" # Mantido como estava, pois é a sintaxe correta
 chown "$USER":"$USER" "/home/$USER/TEMP"
 check_status "chown /home/$USER/TEMP"
 
@@ -69,7 +68,6 @@ mkdir -p "/home/$USER/Documentos/Planilhas"
 check_status "mkdir -p /home/$USER/Documentos/Planilhas"
 chmod 700 "/home/$USER/Documentos/Planilhas"
 check_status "chmod 700 /home/$USER/Documentos/Planilhas"
-# chown "$USER":"$USER" "/home/$USER/Documentos/Planilhas" # Mantido como estava
 chown "$USER":"$USER" "/home/$USER/Documentos/Planilhas"
 check_status "chown /home/$USER/Documentos/Planilhas"
 
@@ -77,7 +75,6 @@ mkdir -p "/home/$USER/AppImages/"
 check_status "mkdir -p /home/$USER/AppImages/"
 chmod 700 "/home/$USER/AppImages/"
 check_status "chmod 700 /home/$USER/AppImages/"
-# chown "$USER":"$USER" "/home/$USER/AppImages/" # Mantido como estava
 chown "$USER":"$USER" "/home/$USER/AppImages/"
 check_status "chown /home/$USER/AppImages/"
 log_message "Pastas de produtividade criadas e dono definido."
