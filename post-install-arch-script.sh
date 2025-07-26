@@ -95,30 +95,29 @@ log_message "Instalando VLC..."
 pacman -S --noconfirm vlc
 check_status "pacman -S vlc"
 
-# Instala yay (necessário para pacotes do AUR como Chrome e alpaca-ai)
+# Instala yay (necessário para pacotes do AUR como alpaca-ai)
 log_message "Instalando yay (AUR helper)..."
 pacman -S --noconfirm yay
 check_status "pacman -S yay"
 
-# Instala Chrome (via yay)
-log_message "Instalando Google Chrome (via yay)..."
-sudo -u "$USER" yay -S --noconfirm google-chrome
-check_status "yay -S google-chrome"
+# Instala firefox
+pacman -S firefox --noconfirm
+check_status "pacman -S firefox --noconfirm"
 
 # Instalando python-cobble (via yay)
 log_message "Instalando python-cobble (via yay)..."
 sudo -u "$USER" yay -S --noconfirm python-cobble
-check_status "yay -S python-cobble"
+check_status "sudo -u "$USER" yay -S --noconfirm python-cobble"
 
 # Instalando python-mammoth (com desabilitação de verificação de assinatura - CUIDADO!)
-log_message "Instalando python-mammoth (com verificação de assinatura desabilitada - CUIDADO!)..."
-pacman -U --noconfirm --config <(echo -e "[options]\nSigLevel = Never") 'https://github.com/pedrodev2025/script-de-post-install-pro-arch-linux/raw/refs/heads/main/cdn-alpaca/python-mammoth-1.9.1-4-any.pkg.tar.zst'
-check_status "pacman -U python-mammoth.pkg.tar.zst (SigLevel=Never)"
+log_message "Instalando python-mammoth ..."
+sudo -u "$USER" yay -S --noconfirm python-mammoth
+check_status "sudo -u "$USER" yay -S --noconfirm python-mammoth"
 
 # Instalando alpaca-ai (via yay)
 log_message "Instalando alpaca-ai (via yay)..."
 sudo -u "$USER" yay -S --noconfirm alpaca-ai
-check_status "yay -S alpaca-ai"
+check_status "sudo -u "$USER" yay -S --noconfirm alpaca-ai"
 
 # Instala Gnome Software e Flatpak (plugin já é integrado com o pacote flatpak)
 log_message "Instalando Gnome Software e Flatpak..."
